@@ -5,8 +5,8 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
+    <div class="py-4">
+        <div class="max-w-2xl mx-auto">
             <div class="bg-white rounded-3xl shadow-sm border border-gray-100/60 overflow-hidden">
                 
                 <div class="p-8 sm:p-10">
