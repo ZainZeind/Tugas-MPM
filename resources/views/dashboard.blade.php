@@ -80,9 +80,9 @@
         </div>
 
         <!-- Main Charts Area -->
-        <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
+        <div class="grid gap-4 grid-cols-1">
             <!-- Overview Chart -->
-            <div class="lg:col-span-4 rounded-xl border border-gray-200 bg-white text-gray-900 shadow-sm">
+            <div class="rounded-xl border border-gray-200 bg-white text-gray-900 shadow-sm">
                 <div class="flex flex-col space-y-1.5 p-6 pb-4">
                     <h3 class="font-semibold leading-none tracking-tight">Ringkasan Pendapatan</h3>
                 </div>
@@ -92,43 +92,21 @@
                 </div>
             </div>
 
-            <!-- Recent Sales -->
-            <div class="lg:col-span-3 rounded-xl border border-gray-200 bg-white text-gray-900 shadow-sm">
-                <div class="flex flex-col space-y-1.5 p-6 pb-4">
-                    <h3 class="font-semibold leading-none tracking-tight">Transaksi Terakhir</h3>
-                    <p class="text-sm text-gray-500">Menampilkan 5 transaksi terbaru.</p>
-                </div>
-                <div class="p-6 pt-0">
-                    <div class="space-y-8">
-                        @forelse($transaksiTerakhir as $trx)
-                        <div class="flex items-center">
-                            <span class="relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full border border-gray-100 shadow-sm">
-                                <span class="flex h-full w-full items-center justify-center bg-gray-50 text-[#0066CC] font-bold text-sm">
-                                    {{ $trx->type == 'income' ? 'IN' : 'OT' }}
-                                </span>
-                            </span>
-                            <div class="ml-4 space-y-1">
-                                <p class="text-sm font-medium leading-none">{{ $trx->description }}</p>
-                                <p class="text-sm text-gray-500 hidden sm:block">{{ \Carbon\Carbon::parse($trx->date)->translatedFormat('d F Y') }}</p>
-                            </div>
-                            <div class="ml-auto font-medium {{ $trx->type == 'income' ? 'text-green-600' : 'text-red-600' }}">
-                                {{ $trx->type == 'income' ? '+' : '-' }}Rp {{ number_format($trx->amount, 0, ',', '.') }}
-                            </div>
-                        </div>
-                        @empty
-                        <div class="text-center text-sm text-gray-500 py-4">Belum ada transaksi</div>
-                        @endforelse
-                    </div>
-                </div>
-            </div>
+
         </div>
 
         <div class="py-4">
-            <!-- =========================================================================
-                 TEMPAT KERJA UNTUK ANGGOTA 2 & 3
-                 (Silakan hapus baris komentar ini dan taruh kode Statistik / Tabel kalian
-                 tepat di baris ini agar terjadi Git Conflict saat Pull Request nanti!)
-                 ========================================================================= -->
+<<<<<<< HEAD (Kodingan di branch Anda: fitur-statistik-dashboard)
+            <div class="p-4 bg-blue-50 border border-blue-200 rounded-lg">
+                <h4 class="font-bold text-sm text-blue-800">📊 Bagian Fitur Statistik (Milestone Anda)</h4>
+                <p class="text-xs text-blue-600">-- Konten Chart dan Grafik Area --</p>
+            </div>
+=======
+            <div class="p-4 bg-orange-50 border border-orange-200 rounded-lg">
+                <h4 class="font-bold text-sm text-orange-800">📋 Bagian Tabel Master (Milestone Anggota 2)</h4>
+                <p class="text-xs text-orange-600">-- Konten Tabel Data Tabel User --</p>
+            </div>
+>>>>>>> origin/main (Kodingan teman Anda yang ditarik dari github)
         </div>
 
     </div>

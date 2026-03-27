@@ -33,12 +33,6 @@ Route::get('/dashboard', function () {
         ->whereYear('date', Carbon::now()->year)
         ->count();
         
-    // 5 Transaksi Terakhir
-    $transaksiTerakhir = Transaction::where('user_id', $userId)
-        ->orderBy('date', 'desc')
-        ->orderBy('id', 'desc')
-        ->take(5)
-        ->get();
         
     // Data Chart Pemasukan Bulanan (Tahun Berjalan)
     $chartData = array_fill(0, 12, 0); // isi 0 untuk 12 bln
@@ -57,7 +51,6 @@ Route::get('/dashboard', function () {
         'totalPengeluaran',
         'saldo',
         'totalTransaksiBulanIni',
-        'transaksiTerakhir',
         'chartData'
     ));
 })->middleware(['auth', 'verified'])->name('dashboard');
