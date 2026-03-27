@@ -35,12 +35,13 @@
 
                         <!-- Nominal -->
                         <div class="mb-8">
-                            <x-input-label for="amount" :value="__('Nominal Uang')" class="mb-2 font-semibold" />
+                            <x-input-label for="amount_display" :value="__('Nominal Uang')" class="mb-2 font-semibold" />
                             <div class="relative">
                                 <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                                     <span class="text-gray-400 font-bold text-lg">Rp</span>
                                 </div>
-                                <input id="amount" class="block w-full pl-12 pr-4 py-3 rounded-2xl border-gray-200 bg-gray-50 focus:bg-white focus:border-indigo-500 focus:ring focus:ring-indigo-100 transition-all font-semibold text-gray-800 text-lg" type="number" name="amount" :value="old('amount')" required min="1" placeholder="0" />
+                                <input id="amount_display" class="block w-full pl-12 pr-4 py-3 rounded-2xl border-gray-200 bg-gray-50 focus:bg-white focus:border-[#0066CC] focus:ring focus:ring-[#0066CC]/20 transition-all font-semibold text-gray-800 text-lg" type="text" required placeholder="0" />
+                                <input type="hidden" name="amount" id="amount_value" value="{{ old('amount') }}" />
                             </div>
                             <x-input-error :messages="$errors->get('amount')" class="mt-2" />
                         </div>
@@ -49,13 +50,13 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
                             <div>
                                 <x-input-label for="date" :value="__('Tanggal')" class="mb-2 font-semibold" />
-                                <input id="date" class="block w-full px-4 py-3 rounded-2xl border-gray-200 bg-gray-50 focus:bg-white focus:border-indigo-500 focus:ring focus:ring-indigo-100 transition-all text-gray-700 font-medium" type="date" name="date" :value="old('date', date('Y-m-d'))" required />
+                                <input id="date" class="block w-full px-4 py-3 rounded-2xl border-gray-200 bg-gray-50 focus:bg-white focus:border-[#0066CC] focus:ring focus:ring-[#0066CC]/20 transition-all text-gray-700 font-medium" type="date" name="date" value="{{ old('date', date('Y-m-d')) }}" required />
                                 <x-input-error :messages="$errors->get('date')" class="mt-2" />
                             </div>
                             
                             <div>
                                 <x-input-label for="description" :value="__('Deskripsi')" class="mb-2 font-semibold" />
-                                <input id="description" class="block w-full px-4 py-3 rounded-2xl border-gray-200 bg-gray-50 focus:bg-white focus:border-indigo-500 focus:ring focus:ring-indigo-100 transition-all text-gray-700 font-medium" type="text" name="description" :value="old('description')" required placeholder="Makan siang / Gaji" />
+                                <input id="description" class="block w-full px-4 py-3 rounded-2xl border-gray-200 bg-gray-50 focus:bg-white focus:border-[#0066CC] focus:ring focus:ring-[#0066CC]/20 transition-all text-gray-700 font-medium" type="text" name="description" value="{{ old('description') }}" required placeholder="Makan siang / Gaji" />
                                 <x-input-error :messages="$errors->get('description')" class="mt-2" />
                             </div>
                         </div>
@@ -65,12 +66,41 @@
                             <a href="{{ route('transactions.index') }}" class="text-sm font-semibold text-gray-500 hover:text-gray-800 mr-6 transition-colors">
                                 Batal
                             </a>
-                            <button type="submit" class="inline-flex items-center px-8 py-3.5 bg-indigo-600 border border-transparent rounded-full font-bold text-sm text-white hover:bg-indigo-700 focus:bg-indigo-700 active:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-200 transition-all shadow-md hover:shadow-lg">
+                            <button type="submit" class="inline-flex items-center px-8 py-3.5 bg-[#0066CC] border border-transparent rounded-full font-bold text-sm text-white hover:bg-[#0052a3] focus:bg-[#0052a3] active:bg-[#004080] focus:outline-none focus:ring-4 focus:ring-[#0066CC]/30 transition-all shadow-md hover:shadow-lg">
                                 Simpan Transaksi
                             </button>
                         </div>
                     </form>
                 </div>
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const amountDisplay = document.getElementById('amount_display');
+                        const amountValue = document.getElementById('amount_value');
+
+                        function formatRupiah(number) {
+                            if (!number) return '';
+                            return new Intl.NumberFormat('id-ID').format(number);
+                        }
+
+                        amountDisplay.addEventListener('input', function(e) {
+                            let value = this.value.replace(/\D/g, '');
+                            
+                            if (value) {
+                                amountValue.value = value;
+                                this.value = formatRupiah(value);
+                            } else {
+                                amountValue.value = '';
+                                this.value = '';
+                            }
+                        });
+
+                        // Set initial formatting if verification fails and old value exists
+                        if (amountValue.value) {
+                            amountDisplay.value = formatRupiah(amountValue.value);
+                        }
+                    });
+                </script>
                 
             </div>
         </div>

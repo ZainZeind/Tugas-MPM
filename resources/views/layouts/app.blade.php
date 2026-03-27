@@ -28,28 +28,12 @@
                 
                 <!-- Topbar -->
                 <header class="h-16 border-b border-gray-100 bg-white flex items-center justify-between px-6 shrink-0 z-10">
-                    <!-- Left part: Search bar equivalent -->
-                    <div class="flex flex-1 items-center">
-                        <div class="relative w-full max-w-sm hidden sm:block">
-                            <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                                <svg class="h-4 w-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                                </svg>
-                            </div>
-                            <input class="block w-full pl-10 pr-3 py-1.5 border border-transparent rounded-lg leading-5 bg-gray-50 text-gray-600 placeholder-gray-400 focus:outline-none focus:bg-white focus:border-gray-200 focus:ring-0 sm:text-sm transition duration-150 ease-in-out" placeholder="Search ⌘J" type="search" />
-                            <div class="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                                <span class="text-gray-400 text-xs border border-gray-200 rounded px-1.5 bg-white shadow-sm">⌘J</span>
-                            </div>
-                        </div>
-                    </div>
+                    <!-- Left part: Placeholder for flex alignment -->
+                    <div class="flex flex-1 items-center"></div>
 
                     <!-- Right part: Actions & Profile -->
                     <div class="ml-4 flex items-center space-x-3 sm:space-x-4 shrink-0">
-                        <button class="w-9 h-9 flex items-center justify-center rounded-lg bg-[#0066CC] text-white hover:bg-[#0052a3] shadow-sm transition-colors">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
-                        </button>
-                        
-                        <div class="h-6 w-px bg-gray-200 mx-1"></div>
+
 
                         <x-dropdown align="right" width="48">
                             <x-slot name="trigger">

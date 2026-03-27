@@ -40,16 +40,26 @@ Route::get('/dashboard', function () {
         ->take(5)
         ->get();
         
-    // Data Chart Pemasukan Bulanan (Tahun Berjalan)
-    $chartData = array_fill(0, 12, 0); // isi 0 untuk 12 bln
-    $transaksiPendapatan = Transaction::where('user_id', $userId)
-        ->where('type', 'income')
+    // Data Chart Bulanan (Tahun Berjalan)
+    $chartPemasukan = array_fill(0, 12, 0);
+    $chartPengeluaran = array_fill(0, 12, 0);
+    $chartSaldo = array_fill(0, 12, 0);
+
+    $allTransactions = Transaction::where('user_id', $userId)
         ->whereYear('date', Carbon::now()->year)
         ->get();
         
-    foreach ($transaksiPendapatan as $t) {
-        $bulanIndex = Carbon::parse($t->date)->month - 1; 
-        $chartData[$bulanIndex] += (float) $t->amount;
+    foreach ($allTransactions as $t) {
+        $bulanIndex = Carbon::parse($t->date)->month - 1;
+        if ($t->type == 'income') {
+            $chartPemasukan[$bulanIndex] += (float) $t->amount;
+        } else {
+            $chartPengeluaran[$bulanIndex] += (float) $t->amount;
+        }
+    }
+
+    for ($i = 0; $i < 12; $i++) {
+        $chartSaldo[$i] = $chartPemasukan[$i] - $chartPengeluaran[$i];
     }
 
     return view('dashboard', compact(
@@ -58,11 +68,15 @@ Route::get('/dashboard', function () {
         'saldo',
         'totalTransaksiBulanIni',
         'transaksiTerakhir',
-        'chartData'
+        'chartPemasukan',
+        'chartPengeluaran',
+        'chartSaldo'
     ));
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
+    Route::get('transactions/export', [TransactionController::class, 'export'])->name('transactions.export');
+    Route::post('transactions/batch-destroy', [TransactionController::class, 'batchDestroy'])->name('transactions.batchDestroy');
     Route::resource('transactions', TransactionController::class);
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

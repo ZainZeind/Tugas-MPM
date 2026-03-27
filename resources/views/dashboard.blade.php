@@ -5,31 +5,15 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between space-y-4 sm:space-y-0">
             <h2 class="text-3xl font-bold tracking-tight text-gray-900">Dashboard</h2>
             <div class="flex items-center space-x-2">
-                <button class="inline-flex items-center justify-center rounded-md border border-gray-200 bg-white px-4 py-2.5 text-sm font-medium text-gray-700 shadow-sm transition-colors hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-[#0066CC] focus:ring-offset-2">
-                    <svg class="mr-2 h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
-                    {{ \Carbon\Carbon::now()->translatedFormat('d M Y') }}
-                </button>
-                <button class="inline-flex items-center justify-center rounded-md bg-[#0066CC] px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[#0052a3] focus:outline-none focus:ring-2 focus:ring-[#0066CC] focus:ring-offset-2">
+
+                <a href="{{ route('transactions.export') }}" class="inline-flex items-center justify-center rounded-md bg-[#0066CC] px-4 py-2.5 text-sm font-medium text-white shadow-sm transition-colors hover:bg-[#0052a3] focus:outline-none focus:ring-2 focus:ring-[#0066CC] focus:ring-offset-2">
+                    <svg class="mr-2 h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                     Unduh Laporan
-                </button>
+                </a>
             </div>
         </div>
 
-        <!-- Navigation Tabs -->
-        <div class="inline-flex h-9 items-center justify-center rounded-lg bg-gray-100 p-1 text-gray-500 text-sm">
-            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md bg-white px-3 py-1 font-medium text-gray-900 shadow-sm ring-offset-white transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
-                Ringkasan
-            </button>
-            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 font-medium transition-all hover:bg-white/50 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50">
-                Analitik
-            </button>
-            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 font-medium transition-all hover:bg-white/50 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50">
-                Laporan
-            </button>
-            <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1 font-medium transition-all hover:bg-white/50 hover:text-gray-900 focus-visible:outline-none focus-visible:ring-2 disabled:pointer-events-none disabled:opacity-50">
-                Notifikasi
-            </button>
-        </div>
+
 
         <!-- Metric Cards -->
         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
@@ -37,7 +21,13 @@
             <div class="rounded-xl border border-gray-200 bg-white text-gray-900 shadow-sm transition-all hover:shadow-md">
                 <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
                     <h3 class="tracking-tight text-sm font-medium">Total Pemasukan</h3>
-                    <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2v20m-7-7h14"></path></svg>
+                    <svg class="h-5 w-5 text-emerald-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="6" width="20" height="12" rx="2" />
+                        <circle cx="12" cy="12" r="2" />
+                        <path d="M18 12h.01M6 12h.01" />
+                        <path d="M15 4l-3-3-3 3"/>
+                        <path d="M12 1v6"/>
+                    </svg>
                 </div>
                 <div class="p-6 pt-0">
                     <div class="text-2xl font-bold">Rp {{ number_format($totalPemasukan, 0, ',', '.') }}</div>
@@ -48,7 +38,13 @@
             <div class="rounded-xl border border-gray-200 bg-white text-gray-900 shadow-sm transition-all hover:shadow-md">
                 <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
                     <h3 class="tracking-tight text-sm font-medium">Total Pengeluaran</h3>
-                    <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    <svg class="h-5 w-5 text-red-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="2" y="6" width="20" height="12" rx="2" />
+                        <circle cx="12" cy="12" r="2" />
+                        <path d="M18 12h.01M6 12h.01" />
+                        <path d="M15 20l-3 3-3-3"/>
+                        <path d="M12 23v-6"/>
+                    </svg>
                 </div>
                 <div class="p-6 pt-0">
                     <div class="text-2xl font-bold">Rp {{ number_format($totalPengeluaran, 0, ',', '.') }}</div>
@@ -70,7 +66,12 @@
             <div class="rounded-xl border border-gray-200 bg-white text-gray-900 shadow-sm transition-all hover:shadow-md">
                 <div class="p-6 flex flex-row items-center justify-between space-y-0 pb-2">
                     <h3 class="tracking-tight text-sm font-medium">Transaksi Bulan Ini</h3>
-                    <svg class="h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    <svg class="h-5 w-5 text-indigo-500" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="m11 17 2 2a1 1 0 1 0 3-3"/>
+                        <path d="m14 14 2.5 2.5a2.12 2.12 0 1 0 3-3L15 9l-2-2-2-2c-.93-.93-2.61-.93-3.54 0L4 8.54a2.12 2.12 0 0 0 0 3l1.5 1.5"/>
+                        <path d="M13 13 8 8"/>
+                        <path d="m16 16 3-3"/>
+                    </svg>
                 </div>
                 <div class="p-6 pt-0">
                     <div class="text-2xl font-bold">{{ $totalTransaksiBulanIni }}</div>
@@ -83,8 +84,24 @@
         <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
             <!-- Overview Chart -->
             <div class="lg:col-span-4 rounded-xl border border-gray-200 bg-white text-gray-900 shadow-sm">
-                <div class="flex flex-col space-y-1.5 p-6 pb-4">
-                    <h3 class="font-semibold leading-none tracking-tight">Ringkasan Pendapatan</h3>
+                <div class="flex flex-row items-center justify-between p-6 pb-4">
+                    <h3 class="font-semibold leading-none tracking-tight">Statistik Keuangan</h3>
+                    
+                    <!-- Custom HTML Legend -->
+                    <div class="flex items-center space-x-5">
+                        <div class="flex items-center space-x-1.5 cursor-pointer hover:opacity-75 transition-opacity" onclick="toggleChartDataset(0, this)">
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#10B981]"></div>
+                            <span class="text-xs text-gray-600 font-medium tracking-tight select-none">Pemasukan</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5 cursor-pointer hover:opacity-75 transition-opacity" onclick="toggleChartDataset(1, this)">
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#0066CC]"></div>
+                            <span class="text-xs text-gray-600 font-medium tracking-tight select-none">Saldo Bersih</span>
+                        </div>
+                        <div class="flex items-center space-x-1.5 cursor-pointer hover:opacity-75 transition-opacity" onclick="toggleChartDataset(2, this)">
+                            <div class="w-2.5 h-2.5 rounded-full bg-[#EF4444]"></div>
+                            <span class="text-xs text-gray-600 font-medium tracking-tight select-none">Pengeluaran</span>
+                        </div>
+                    </div>
                 </div>
                 <div class="px-6 pb-6 pt-0 h-[350px]">
                     <!-- Chart Canvas -->
@@ -136,6 +153,23 @@
     <!-- Chart Setup Code (Using Alpine to run when DOM is ready intuitively with Breeze features)-->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
+        // Global toggle function for custom legend
+        function toggleChartDataset(index, element) {
+            const chart = window.overviewChart;
+            if (!chart) return;
+            
+            const isVisible = chart.isDatasetVisible(index);
+            if (isVisible) {
+                chart.hide(index);
+                element.classList.add('opacity-40');
+                element.querySelector('span').classList.add('line-through');
+            } else {
+                chart.show(index);
+                element.classList.remove('opacity-40');
+                element.querySelector('span').classList.remove('line-through');
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", function () {
             // Wait for Chart JS to load if needed in async environments
             setTimeout(() => {
@@ -143,20 +177,40 @@
                 if(!canvas) return;
                 
                 const ctx = canvas.getContext('2d');
-                const chartData = @json($chartData);
+                const chartPemasukan = @json($chartPemasukan);
+                const chartSaldo = @json($chartSaldo);
+                const chartPengeluaran = @json($chartPengeluaran);
                 
-                new Chart(ctx, {
+                window.overviewChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'],
-                        datasets: [{
-                            label: 'Pendapatan',
-                            data: chartData,
-                            backgroundColor: '#0066CC', // Primary brand color
-                            hoverBackgroundColor: '#0052a3',
-                            borderRadius: 6,
-                            borderSkipped: false,
-                        }]
+                        datasets: [
+                            {
+                                label: 'Pemasukan',
+                                data: chartPemasukan,
+                                backgroundColor: '#10B981', // emerald-500
+                                hoverBackgroundColor: '#059669',
+                                borderRadius: 0,
+                                borderSkipped: false,
+                            },
+                            {
+                                label: 'Saldo Bersih',
+                                data: chartSaldo,
+                                backgroundColor: '#0066CC', // blue
+                                hoverBackgroundColor: '#0052a3',
+                                borderRadius: 0,
+                                borderSkipped: false,
+                            },
+                            {
+                                label: 'Pengeluaran',
+                                data: chartPengeluaran,
+                                backgroundColor: '#EF4444', // red-500
+                                hoverBackgroundColor: '#DC2626',
+                                borderRadius: 0,
+                                borderSkipped: false,
+                            }
+                        ]
                     },
                     options: {
                         responsive: true,
@@ -189,11 +243,11 @@
                             },
                             y: {
                                 grid: { 
-                                    color: '#f1f5f9',
+                                    color: '#e2e8f0',
                                     drawBorder: false,
                                     drawTicks: false,
                                 },
-                                border: { display: false, dash: [4, 4] },
+                                border: { display: false },
                                 ticks: {
                                     color: '#64748b',
                                     font: { size: 12 },
